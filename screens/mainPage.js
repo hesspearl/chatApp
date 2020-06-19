@@ -18,7 +18,7 @@ import api from "../service/axios";
 import axios from "axios";
 import SwitchColors from "../components/SwitchColors";
 import Colors from "../Colors";
-import Modal from "./modal"
+import Modal from "../components/modal"
 
 YellowBox.ignoreWarnings(["Setting a timer"]);
 
@@ -148,15 +148,15 @@ const mainPage = ({ navigation }) => {
   return (
     <LinearGradient colors={  !darkColor
       ? [Colors.firstColor, Colors.secondColor]
-      : ["white", "black"]}
-     start={{ x: 0.5, y: 1 }} 
-    end={{ x: 1, y: 0 }}
+      : ["grey", "white"]}
+     start={{ x: 1, y: 1 }} 
+    end={{ x: 0, y: 0 }}
     style={styles.view}>
    
     <View 
     style={{
       flex:1,
-      
+      marginTop:20
     }} >
      
        
@@ -255,7 +255,7 @@ const mainPage = ({ navigation }) => {
             marginTop: 0,
             borderRadius: 4,
             padding: 4,
-            
+            backgroundColor:"white",
             flex: 1,
             borderWidth: 1,
           }}
@@ -269,8 +269,8 @@ const mainPage = ({ navigation }) => {
         />
         <TouchableOpacity onPress={()=>setVisible(true)}>
           <Ionicons
-            style={{ margin: 3 }}
-            name="md-send"
+            style={{ margin: 3 , marginHorizontal:7 }}
+            name="md-image"
             size={32}
             color={"#999"}
           />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
 import {
   View,
   Text,
@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Switch,
 } from "react-native";
-import Info from "./info";
+import Info from "../components/info";
 import { LinearGradient } from "expo-linear-gradient";
 import Colors from "../Colors";
 
@@ -23,10 +23,10 @@ const Profile = ({ route, navigation }) => {
       colors={
         !darkColor
           ? [Colors.firstColor, Colors.secondColor]
-          : ["white", "black"]
+          : ["grey", "white"]
       }
-      start={{ x: 1, y: 1 }}
-      end={{ x: 0, y: 0 }}
+      start={{ x: 0.5, y: 1 }}
+      end={{ x: 1, y: 0 }}
       style={{ flex: 1 }}
     >
     
