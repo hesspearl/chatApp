@@ -5,37 +5,48 @@ import { View, Text, TouchableHighlight,
 
 const ButtonHighlight = (props) => {
 
+  const{next}=props
+
     const changeSize = new Animated.Value(0);
 
-    console.log(changeSize)
     const useSizeUp = () => {
         changeSize.setValue(0);
         Animated.timing(changeSize, {
           toValue: 1,
-          duration: 2000,
+          duration: 1500,
           easing: Easing.bounce,
           
         }).start()
+
+     
       };
 
-    
     
       const size = changeSize.interpolate({
         inputRange: [0, 0.5, 1],
         outputRange: [1,1.5, 1],
       });
 
+      const nextPage=()=>{
+        setTimeout(
+        ()=>{next()}  ,1500
+        )
+      }
+    
 
   return (
-    <TouchableHighlight onPress={() => {
+    <TouchableHighlight 
+onPress={() => {
         useSizeUp()
+        nextPage()
     }}
+  
    style={{height:200, borderRadius:100,
    elevation:10}}>
      <Animated.View style={{
           ...styles.button,
            transform:[{ scale: size }],
-           
+         ...props.style
       }}>
     <LinearGradient
     

@@ -1,27 +1,90 @@
-import React from "react";
-import { View, Text, TextInput, StyleSheet,KeyboardAvoidingView } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  Keyboard,
+  TextInput,
+  StyleSheet,
+  KeyboardAvoidingView,
+} from "react-native";
 import ButtonHighlight from "../components/ButtonHighlited";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import * as authActions from "../store/action/auth";
+
 const SignIn = (props) => {
-  return (
-      <KeyboardAvoidingView
-       style={styles.containerView}
-       enabled={false}
-     >
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const [Show, setShow] = useState(true);
+
+
+  //
+
+  useEffect(() => {
+    Keyboard.addListener("keyboardDidShow", _keyboardWillShow);
+    Keyboard.addListener("keyboardDidHide", _keyboardDidHide);
+
+    // cleanup function
+    return () => {
+      Keyboard.removeListener("keyboardDidShow", _keyboardWillShow);
+      Keyboard.removeListener("keyboardDidHide", _keyboardDidHide);
+    };
+  }, []);
+
+  const _keyboardWillShow = () => {
     
-      <View style={{ ...styles.buttonsContainer, 
-      top: 0, left: 0 }}>
-        <ButtonHighlight>NEW ACCOUNT</ButtonHighlight>
+    setShow(false);
+  };
+
+  const _keyboardDidHide = () => {
+   
+    setShow(true);
+  };
+
+  const pressHandler = async () => {
+    setIsLoading(true);
+    try {
+      await dispatch(authActions.signIn(Email, Password));
+    } catch (err) {
+      alert(err.message);
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <KeyboardAvoidingView style={styles.containerView} enabled={false}>
+      <View style={{ ...styles.buttonsContainer, top: 0, left: 0 }}>
+        {Show && (
+          <ButtonHighlight next={() => navigation.navigate("newAccount")}>
+            NEW ACCOUNT
+          </ButtonHighlight>
+        )}
       </View>
       <View style={styles.container}>
-        <Text style={styles.welcome}>WELCOME</Text>
-        <TextInput style={styles.inputs} placeholder="name" />
-        <TextInput style={styles.inputs} placeholder="password"/>
+        <Text style={styles.welcome}>WELCOME BACK</Text>
+        <TextInput
+          style={styles.inputs}
+          placeholder="Email"
+          onChangeText={(text) => setEmail(text)}
+          value={Email}
+          onSubmitEditing={Keyboard.dismiss}
+        />
+        <TextInput
+          style={styles.inputs}
+          placeholder="password"
+          onChangeText={(text) => setPassword(text)}
+          value={Password}
+          onSubmitEditing={Keyboard.dismiss}
+        />
       </View>
-      <View style={{ ...styles.buttonsContainer, 
-      bottom: 50, right: 0 }}>
-        <ButtonHighlight>SIGN IN</ButtonHighlight>
+      <View style={{ ...styles.buttonsContainer, bottom: 50, right: 0 }}>
+        
+          <ButtonHighlight onPress={pressHandler}>SIGN IN</ButtonHighlight>
+       
       </View>
-
     </KeyboardAvoidingView>
   );
 };
@@ -53,7 +116,6 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     height: "20%",
     position: "absolute",
-  
   },
   welcome: {
     fontSize: 50,
