@@ -57,7 +57,7 @@ onPress={() => {
       style={styles.button}>
    
     
-        <Text style={styles.text}>{props.children}</Text>
+        <Text style={{...styles.text,fontFamily:"Inter_900Black"}}>{props.children}</Text>
       
     </LinearGradient>
 </Animated.View>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
    fontWeight: "bold",
     fontSize: 20,
     color:"#4a4e69",
-
+ 
  },
 });
 export default ButtonHighlight;

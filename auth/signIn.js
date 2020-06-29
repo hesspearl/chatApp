@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import * as authActions from "../store/action/auth";
 
+
 const SignIn = (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ const SignIn = (props) => {
         )}
       </View>
       <View style={styles.container}>
-        <Text style={styles.welcome}>WELCOME BACK</Text>
+        <Text style={{...styles.welcome,fontFamily:"Piedra_400Regular"}}>WELCOME BACK</Text>
         <TextInput
           style={styles.inputs}
           placeholder="Email"
@@ -122,6 +123,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontStyle: "italic",
     marginBottom: 20,
+  
   },
 });
 export default SignIn;

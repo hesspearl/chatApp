@@ -1,12 +1,15 @@
 import React from "react";
 import {
   createStackNavigator,
-  HeaderBackButton,
+ TransitionPresets,
+ CardStyleInterpolators
 } from "@react-navigation/stack";
 import Profile from "../screens/profile";
 import MainPage from "../screens/mainPage";
 import SignIn from "../auth/signIn";
 import NewAccount from "../auth/new-account";
+import {Easing} from "react-native"
+
 
 const Stack = createStackNavigator();
 
@@ -28,6 +31,20 @@ export const ChatsNavigator = () => {
   );
 };
 
+const config = {
+  animation: 'spring',
+  config: {
+    stiffness: 1000,
+    damping: 50,
+    mass: 3,
+    overshootClamping: false,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01,
+  },
+};
+
+
+
 const AdminStackNavigator = createStackNavigator();
 
 export const AdminNavigator = () => {
@@ -37,11 +54,22 @@ export const AdminNavigator = () => {
       screenOptions={{ 
         headerTitle: null,
          headerTransparent: true ,
-         headerLeft:null}}
+         headerLeft:null,
+         gestureEnabled: true ,
+         gestureDirection:"horizontal",
+         cardStyleInterpolator:
+         CardStyleInterpolators.forFadeFromBottomAndroid,
+
+         transitionSpec:{
+           open:config,
+           close:config
+         }
+         }}
     >
     <AdminStackNavigator.Screen
        name="signIn" 
-       component={SignIn} /> 
+       component={SignIn}
+        /> 
     <AdminStackNavigator.Screen
        name="newAccount"
         component={NewAccount} />
