@@ -57,7 +57,7 @@ onPress={() => {
       style={styles.button}>
    
     
-        <Text style={{...styles.text,fontFamily:"Inter_900Black"}}>{props.children}</Text>
+        <Text style={{...styles.text,fontFamily:"Piedra"}}>{props.children}</Text>
       
     </LinearGradient>
 </Animated.View>

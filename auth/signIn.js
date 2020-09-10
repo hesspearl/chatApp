@@ -65,7 +65,7 @@ const SignIn = (props) => {
         )}
       </View>
       <View style={styles.container}>
-        <Text style={{...styles.welcome,fontFamily:"Piedra_400Regular"}}>WELCOME BACK</Text>
+        <Text style={{...styles.welcome,fontFamily:"Piedra"}}>WELCOME BACK</Text>
         <TextInput
           style={styles.inputs}
           placeholder="Email"

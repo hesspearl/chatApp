@@ -12,9 +12,9 @@ import { NavigationContainer } from "@react-navigation/native";
 //token
 
     return<NavigationContainer>
-    <AdminNavigator/>
+    {/* <AdminNavigator/> */}
        
-    {/* <ChatsNavigator/> */}
+    <ChatsNavigator/> 
     </NavigationContainer>
  }
 //  
